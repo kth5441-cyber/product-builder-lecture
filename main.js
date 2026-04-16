@@ -3,22 +3,27 @@ const lottoNumbersDiv = document.getElementById('lotto-numbers');
 const themeToggle = document.getElementById('theme-toggle');
 
 // Theme Toggle Logic
-const currentTheme = localStorage.getItem('theme') || 'light';
-document.documentElement.setAttribute('data-theme', currentTheme);
-updateThemeButtonText(currentTheme);
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeButtonText(savedTheme);
+}
+
+function updateThemeButtonText(theme) {
+    themeToggle.textContent = theme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode';
+}
 
 themeToggle.addEventListener('click', () => {
-    let theme = document.documentElement.getAttribute('data-theme');
-    let newTheme = theme === 'light' ? 'dark' : 'light';
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
     
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     updateThemeButtonText(newTheme);
 });
 
-function updateThemeButtonText(theme) {
-    themeToggle.textContent = theme === 'light' ? 'Dark Mode' : 'Light Mode';
-}
+// Initialize theme on load
+initTheme();
 
 // Lotto Generation Logic
 generateBtn.addEventListener('click', () => {
