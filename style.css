@@ -1,92 +1,106 @@
 :root {
-    --bg-color: #ffffff;
-    --text-color: #333333;
-    --container-bg: #ffffff;
+    --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    --text-color: #2c3e50;
+    --container-bg: rgba(255, 255, 255, 0.9);
     --btn-bg: #4CAF50;
     --btn-hover: #45a049;
-    --ball-shadow: rgba(0, 0, 0, 0.2);
-    --toggle-border: #333333;
+    --ball-shadow: rgba(0, 0, 0, 0.15);
+    --toggle-border: #2c3e50;
 }
 
 [data-theme="dark"] {
-    --bg-color: #121212;
-    --text-color: #ffffff;
-    --container-bg: #1e1e1e;
-    --btn-bg: #388e3c;
-    --btn-hover: #2e7d32;
-    --ball-shadow: rgba(0, 0, 0, 0.5);
-    --toggle-border: #ffffff;
+    --bg-gradient: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+    --text-color: #ecf0f1;
+    --container-bg: rgba(30, 30, 30, 0.85);
+    --btn-bg: #2ecc71;
+    --btn-hover: #27ae60;
+    --ball-shadow: rgba(0, 0, 0, 0.4);
+    --toggle-border: #ecf0f1;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
-    background-color: var(--bg-color);
+    background: var(--bg-gradient);
+    background-attachment: fixed;
     color: var(--text-color);
-    transition: background-color 0.4s ease, color 0.4s ease;
+    transition: all 0.5s ease;
 }
 
 .container {
     text-align: center;
-    padding: 3rem;
-    border-radius: 15px;
+    padding: 3.5rem;
+    border-radius: 24px;
     background-color: var(--container-bg);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 500px;
+    transition: all 0.5s ease;
+}
+
+h1 {
+    margin-top: 0;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
 }
 
 #generate-btn {
-    padding: 12px 28px;
-    font-size: 18px;
-    font-weight: bold;
+    padding: 16px 32px;
+    font-size: 20px;
+    font-weight: 700;
     cursor: pointer;
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     background-color: var(--btn-bg);
     color: white;
-    margin-bottom: 30px;
-    transition: transform 0.2s, background-color 0.3s;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #generate-btn:hover {
     background-color: var(--btn-hover);
-    transform: translateY(-2px);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
 }
 
 #generate-btn:active {
-    transform: translateY(0);
+    transform: translateY(-1px);
 }
 
 #theme-toggle {
     position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 10px 20px;
+    top: 30px;
+    right: 30px;
+    padding: 12px 24px;
     cursor: pointer;
     border: 2px solid var(--toggle-border);
-    border-radius: 25px;
+    border-radius: 30px;
     background: transparent;
     color: var(--text-color);
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 16px;
     transition: all 0.3s ease;
     z-index: 1000;
+    backdrop-filter: blur(5px);
 }
 
 #theme-toggle:hover {
     background-color: var(--text-color);
-    color: var(--bg-color);
+    color: var(--container-bg);
 }
 
 #lotto-numbers {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 12px;
     flex-wrap: wrap;
-    min-height: 60px;
+    margin-top: 20px;
 }
 
 .lotto-ball {
@@ -96,15 +110,29 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 22px;
-    font-weight: bold;
+    font-size: 20px;
+    font-weight: 800;
     color: white;
-    box-shadow: 0 4px 8px var(--ball-shadow);
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    box-shadow: 0 6px 12px var(--ball-shadow);
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 @keyframes popIn {
-    0% { transform: scale(0); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
+    0% { transform: scale(0.5) translateY(20px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 2rem;
+    }
+    h1 {
+        font-size: 1.8rem;
+    }
+    .lotto-ball {
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
+    }
 }
